@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import { CiMusicNote1 } from "react-icons/ci";
 import axios from "axios";
 import { TbRobot } from "react-icons/tb";
+import { FaMicrophone, FaStop } from "react-icons/fa"; // Import microphone icons
 
 const Landing = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);
@@ -18,6 +19,9 @@ const Landing = () => {
   const userId = user?._id;
   const name = user?.name;
   const [loading, setLoading] = useState(false);
+  const [isRecording, setIsRecording] = useState(false); // New state for recording
+  const [recognition, setRecognition] = useState(null); // Speech recognition object
+
 
   const handleChatbotClick = () => {
     if (allGuardians.length === 0) {
@@ -154,7 +158,44 @@ const Landing = () => {
       console.log(error);
     }
   };
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const SpeechRecognition =
+        window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (SpeechRecognition) {
+        const recognitionInstance = new SpeechRecognition();
+        recognitionInstance.continuous = false;
+        recognitionInstance.interimResults = false;
+        recognitionInstance.lang = "en-US";
 
+        recognitionInstance.onresult = (event) => {
+          const transcript = event.results[0][0].transcript;
+          setUserInput((prev) => prev + " " + transcript);
+        };
+
+        recognitionInstance.onerror = (event) => {
+          console.error("Speech recognition error", event.error);
+          setIsRecording(false);
+        };
+
+        recognitionInstance.onend = () => {
+          setIsRecording(false);
+        };
+
+        setRecognition(recognitionInstance);
+      }
+    }
+  }, []);
+
+  const toggleRecording = () => {
+    if (isRecording) {
+      recognition.stop();
+      setIsRecording(false);
+    } else {
+      recognition.start();
+      setIsRecording(true);
+    }
+  };
   useEffect(() => {
     getUser();
   }, []);
@@ -380,6 +421,16 @@ const Landing = () => {
                   className="flex-1 p-2 border border-gray-300 rounded-lg"
                   placeholder="Type a message..."
                 />
+                <button
+                  onClick={toggleRecording}
+                  className={`p-2 rounded-lg mx-2 ${
+                    isRecording
+                      ? "bg-red-500 text-white"
+                      : "bg-gray-200 text-gray-800"
+                  } hover:bg-gray-300`}
+                >
+                  {isRecording ? <FaStop /> : <FaMicrophone />}
+                </button>
                 <button
                   onClick={handleSendMessage}
                   className="bg-purple-600 text-white p-2 rounded-lg ml-2 w-[60px] h-[55px] hover:bg-purple-700 flex justify-center items-center"
