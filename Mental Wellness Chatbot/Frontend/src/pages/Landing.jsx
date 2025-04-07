@@ -200,7 +200,7 @@ const Landing = () => {
   useEffect(() => {
     getUser();
   }, []);
-
+  const [isContactOpen, setIsContactOpen] = useState(false);
   return (
     <>
       <Header />
@@ -474,11 +474,31 @@ const Landing = () => {
               Have questions or need support? Connect with our team for
               personalized assistance and resources.
             </p>
-            <button className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full">
+            <button onClick={() => setIsContactOpen(true)} className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full">
               Contact Us
             </button>
           </div>
         </section>
+        {/* Contact Modal */}
+      {isContactOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-80">
+            <h2 className="text-xl font-bold mb-4">Contact Details</h2>
+            <p><strong>Name:</strong> Rajiya</p>
+            <p><strong>Email:</strong> rajiyask221@gmail.com</p>
+            <p><strong>Phone:</strong> 7997902631</p>
+
+            {/* Close Button */}
+            <button
+              onClick={() => setIsContactOpen(false)}
+              className="mt-4 bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
 
         {/* Footer */}
         <footer className="bg-gray-800 py-6">
