@@ -218,7 +218,7 @@ const Landing = () => {
               building intelligent systems, like chatbots , to provide mental
               health support.
             </p>
-            <button className="mt-8 bg-white text-purple-600 font-bold py-3 px-6 rounded-full hover:bg-gray-200">
+            <button onClick={handleChatbotClick} className="mt-8 bg-white text-purple-600 font-bold py-3 px-6 rounded-full hover:bg-gray-200">
               Start Your Journey
             </button>
           </div>
