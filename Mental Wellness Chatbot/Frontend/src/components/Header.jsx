@@ -16,7 +16,7 @@ const Header = () => {
       <div className="flex items-center space-x-2">
         <MdHealthAndSafety className="text-white text-[30px]" />
         <h1 className="text-white text-[30px] font-bold tracking-wide">
-          Mental Wellness Chatbot
+          AIHealth
         </h1>
       </div>
 
