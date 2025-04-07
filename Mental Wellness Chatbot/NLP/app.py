@@ -70,11 +70,12 @@ spotify_client_credentials_manager = SpotifyClientCredentials(client_id='9959a1d
 sp = spotipy.Spotify(client_credentials_manager=spotify_client_credentials_manager)
 
 mood_to_genre = {
-    "happy": "dance",
-    "sad": "blues",
+    "happy": "pop",
+    "sad": "folk",
     "angry": "rock",
-    "anxious": "lo-fi",
-    
+    "fearful": "rap",
+    "surprised": "dance",
+    "neutral": "r&b"
 }
 
 class MoodRequest(BaseModel):
