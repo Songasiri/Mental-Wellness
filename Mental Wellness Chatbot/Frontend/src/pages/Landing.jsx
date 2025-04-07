@@ -14,14 +14,13 @@ const Landing = () => {
   const [playlist, setPlaylist] = useState(null);
   const allMails = JSON.parse(localStorage.getItem("guardianEmails")) || [];
   const [allGuardians, setAllGuardians] = useState([]);
-  const [isGuardianModalOpen, setIsGuardianModalOpen] = useState(false); // New state for modal
+  const [isGuardianModalOpen, setIsGuardianModalOpen] = useState(false);
   const user = JSON.parse(localStorage.getItem("user"));
   const userId = user?._id;
   const name = user?.name;
   const [loading, setLoading] = useState(false);
   const [isRecording, setIsRecording] = useState(false); // New state for recording
   const [recognition, setRecognition] = useState(null); // Speech recognition object
-
 
   const handleChatbotClick = () => {
     if (allGuardians.length === 0) {
@@ -158,6 +157,7 @@ const Landing = () => {
       console.log(error);
     }
   };
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       const SpeechRecognition =
@@ -196,11 +196,10 @@ const Landing = () => {
       setIsRecording(true);
     }
   };
+
   useEffect(() => {
     getUser();
   }, []);
-  
-  const [isContactOpen, setIsContactOpen] = useState(false);
 
   return (
     <>
@@ -219,7 +218,7 @@ const Landing = () => {
               building intelligent systems, like chatbots , to provide mental
               health support.
             </p>
-            <button onClick={handleChatbotClick} className="mt-8 bg-white text-purple-600 font-bold py-3 px-6 rounded-full hover:bg-gray-200">
+            <button className="mt-8 bg-white text-purple-600 font-bold py-3 px-6 rounded-full hover:bg-gray-200">
               Start Your Journey
             </button>
           </div>
@@ -433,10 +432,10 @@ const Landing = () => {
                 </button>
                 <button
                   onClick={handleSendMessage}
-                  className="bg-purple-600 text-white p-2 rounded-lg ml-2 w-[60px] h-[55px] hover:bg-purple-700 flex justify-center items-center"
+                  className="bg-purple-600 text-white p-2 rounded-lg w-[60px] h-[55px] hover:bg-purple-700 flex justify-center items-center"
                 >
                   {loading ? (
-                    <TbRobot size={30} className="animate-bounce text-black " />
+                    <TbRobot size={30} className="animate-bounce text-black" />
                   ) : (
                     "Send"
                   )}
@@ -475,30 +474,11 @@ const Landing = () => {
               Have questions or need support? Connect with our team for
               personalized assistance and resources.
             </p>
-            <button onClick={() => setIsContactOpen(true)} className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full">
+            <button className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full">
               Contact Us
             </button>
           </div>
         </section>
-        {/* Contact Modal */}
-      {isContactOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-80">
-            <h2 className="text-xl font-bold mb-4">Contact Details</h2>
-            <p><strong>Name:</strong> Rajiya</p>
-            <p><strong>Email:</strong> rajiyask221@gmail.com</p>
-            <p><strong>Phone:</strong> 7997902631</p>
-
-            {/* Close Button */}
-            <button
-              onClick={() => setIsContactOpen(false)}
-              className="mt-4 bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      )}
 
         {/* Footer */}
         <footer className="bg-gray-800 py-6">
