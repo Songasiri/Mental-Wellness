@@ -75,9 +75,14 @@ Run the application: uvicorn app:app --reload
 
 ## Team
 Shiek Rajiya
+
 Tirumalasetti Suvarna Lakshmi Kalyani
+
 Thatti Tejasri 
+
 Pasumarti Kriti Meher
+
 Songa Siri
+
 ### Guide: Dr. Raja Rao PBV, Associate Professor
 
